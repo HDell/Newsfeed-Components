@@ -107,8 +107,104 @@ const data = [
 
   Step 3: return the entire component.
 
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+  Step 4: Map over the data, creating a component for each object and add each component to the DOM as children of the 'articles' div.
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+//Steps 1 -> 3
+function divCreator(article) {
+  //element creation
+  const div = document.createElement('div');
+  const title = document.createElement('h2');
+  const date = document.createElement('p');
+  const p1 = document.createElement('p');
+  const p2 = document.createElement('p');
+  const p3 = document.createElement('p');
+  const span = document.createElement("span");
+  //add classes
+  div.classList.add("article");
+  date.classList.add("date");
+  span.classList.add("expandButton");
+  //append children
+  div.appendChild(title);
+  div.appendChild(date);
+  div.appendChild(p1);
+  div.appendChild(p2);
+  div.appendChild(p3);
+  div.appendChild(span);
+  //populate text
+  title.textContent = article.title;
+  date.textContent = article.date;
+  p1.textContent = article.firstParagraph;
+  p2.textContent = article.secondParagraph;
+  p3.textContent = article.thirdParagraph;
+  span.textContent = "Click Me";
+  //event listeners
+  span.addEventListener("click", (e) => {
+    div.classList.toggle("article-open");
+  });
+  //return div article
+  return div;
+}
+
+//Step 4
+let parent = document.querySelector(".articles");
+let articleComponents = data.map((jsonItem) => {
+  let newDiv = divCreator(jsonItem);
+  return newDiv;
+});
+articleComponents.forEach((articleComponent) => {
+  parent.appendChild(articleComponent);
+});
+
+//Step 5
+parent.appendChild(divCreator(  {
+  title: 'Handell Desulme 2019',
+  date: 'Dec 4th, 2019',
+  firstParagraph: `Hi, My Name Is (What?)`,
+
+  secondParagraph: `My Name Is (Who?)`,
+
+  thirdParagraph: `My Name Is (Chicka Chicka) Handell Desulme`
+}));
+
+//Part 2: Add Articles
+let fewNewArticles = [
+  {
+    title: 'Part 2 New Article 1',
+    date: 'Random Date',
+    firstParagraph: `Lorem Ipsum etc other latin words yada yada etc etc more words and more concepts and clauses you get the gist`,
+
+    secondParagraph: `Lorem Ipsum etc other latin words yada yada etc etc more words and more concepts and clauses you get the gist`,
+
+    thirdParagraph: `Lorem Ipsum etc other latin words yada yada etc etc more words and more concepts and clauses you get the gist`
+  },
+  {
+    title: 'Part 2 New Article 2',
+    date: 'Random Date',
+    firstParagraph: `Lorem Ipsum etc other latin words yada yada etc etc more words and more concepts and clauses you get the gist`,
+
+    secondParagraph: `Lorem Ipsum etc other latin words yada yada etc etc more words and more concepts and clauses you get the gist`,
+
+    thirdParagraph: `Lorem Ipsum etc other latin words yada yada etc etc more words and more concepts and clauses you get the gist`
+  },
+  {
+    title: 'Part 2 New Article 3',
+    date: 'Random Date',
+    firstParagraph: `Lorem Ipsum etc other latin words yada yada etc etc more words and more concepts and clauses you get the gist`,
+
+    secondParagraph: `Lorem Ipsum etc other latin words yada yada etc etc more words and more concepts and clauses you get the gist`,
+
+    thirdParagraph: `Lorem Ipsum etc other latin words yada yada etc etc more words and more concepts and clauses you get the gist`
+  }
+];
+
+let fewMoreArticleComponents = fewNewArticles.map((jsonItem) => {
+  let newDiv = divCreator(jsonItem);
+  return newDiv;
+});
+fewMoreArticleComponents.forEach((articleComponent) => {
+  parent.appendChild(articleComponent);
+});
